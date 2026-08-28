@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Interstella</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game">
+    <canvas id="canvas" aria-label="Interstella space shooter"></canvas>
+    <div id="hud">
+      <div>INTERSTELLA</div>
+      <div>Score: <span id="score">0</span></div>
+      <div>Hull: <span id="health">100</span>%</div>
+      <div>Wave: <span id="wave">1</span></div>
+    </div>
+    <section id="overlay">
+      <h1>INTERSTELLA</h1>
+      <p id="message">Defend the frontier.</p>
+      <button id="start">START MISSION</button>
+      <p class="controls">Move: WASD / Arrow Keys · Fire: Space · Restart: R</p>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
