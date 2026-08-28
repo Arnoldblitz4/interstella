@@ -1,0 +1,4 @@
+export type ProductId="starter_credits"|"commander_pack";
+export interface BillingAdapter{isAvailable():Promise<boolean>;purchase(productId:ProductId):Promise<"success"|"cancelled"|"unavailable">}
+export class DemoBilling implements BillingAdapter{async isAvailable(){return false}async purchase(_productId:ProductId){return "unavailable" as const}}
+/* Production: connect a platform-compliant Google Play Billing / Apple StoreKit adapter through a native bridge such as Capacitor. Verify purchases server-side before granting premium entitlements. The demo build does not process real-money payments. */
