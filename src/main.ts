@@ -2,7 +2,7 @@ import { generateLevel, type GeneratedLevel } from "./levels";
 
 type ShipId="viper"|"nova"|"titan"; type WeaponId="pulse"|"twin"|"plasma"|"rail"; type UpgradeKey="damage"|"fireRate"|"shield"|"hull";
 type Save={credits:number,xp:number,level:number,selected:ShipId,ships:Record<ShipId,boolean>,upgrades:Record<UpgradeKey,number>,weapon:WeaponId,completed:number[],best:number};
-type E={x:number,y:number,r:number,hp:number,max:number,type:string,t:number,shoot:number};
+type E={x:number,y:number,r:number,hp:number,max:number,type:string,t:number,shoot:number,[k:string]:any};
 const C=document.querySelector<HTMLCanvasElement>("#canvas")!,X=C.getContext("2d")!,O=document.querySelector("#overlay")!,M=document.querySelector("#message")!,A=document.querySelector<HTMLButtonElement>("#action")!;
 const KEY="interstella-save-v4",ships=[{id:"viper" as ShipId,name:"Viper",speed:470,hull:90,price:0,unlock:1},{id:"nova" as ShipId,name:"Nova",speed:395,hull:125,price:900,unlock:3},{id:"titan" as ShipId,name:"Titan",speed:330,hull:175,price:1800,unlock:6}],weapons=[{id:"pulse" as WeaponId,name:"Pulse",cool:.16,damage:1,price:0,unlock:1},{id:"twin" as WeaponId,name:"Twin Laser",cool:.2,damage:1,price:600,unlock:2},{id:"plasma" as WeaponId,name:"Plasma",cool:.34,damage:3.5,price:1200,unlock:4},{id:"rail" as WeaponId,name:"Rail Cannon",cool:.55,damage:8,price:2400,unlock:7}];
 const fresh=():Save=>({credits:0,xp:0,level:1,selected:"viper",ships:{viper:true,nova:false,titan:false},upgrades:{damage:1,fireRate:1,shield:0,hull:0},weapon:"pulse",completed:[],best:0});let save=fresh();try{save={...save,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch{}
