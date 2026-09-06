@@ -7,7 +7,7 @@ const lines=[
  {at:24,title:"DO NOT FOLLOW THE LIGHT",text:"MICA // I have no record of sending that message. Captain... who changed my voice?",tone:"dark"},
  {at:30,title:"INTERSTELLA // ZERO HOUR",text:"LYRA // The war was never outside the ship. We've been flying toward the source.",tone:"final"}
 ];
-function completed(){try{return JSON.parse(localStorage.getItem("interstella-save")||localStorage.getItem("interstella")||"{}").completed||[]}catch{return []}}
+function completed(){const out:number[]=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i)||"";const raw=localStorage.getItem(k)||"";if(!/interstella|save|progress/i.test(k+raw))continue;const o=JSON.parse(raw);if(Array.isArray(o.completed))for(const n of o.completed)if(Number.isFinite(Number(n)))out.push(Number(n))}}catch{}return [...new Set(out)]}
 function currentStage(c:number[]){let s=0;for(const x of lines)if(x.at>0&&c.includes(x.at))s=Math.max(s,lines.indexOf(x));return s}
 function ensure(){let el=document.getElementById("interstella-story");if(el)return el;el=document.createElement("div");el.id="interstella-story";el.innerHTML='<div class="story-card"><div class="story-tag">SHIP COMMS</div><div class="story-title"></div><div class="story-text"></div><button class="story-close">CONTINUE</button></div>';document.body.appendChild(el);el.querySelector(".story-close")!.addEventListener("click",()=>el!.classList.remove("show"));return el}
 function show(i:number){const e=ensure(),l=lines[i];e.className="show "+l.tone;(e.querySelector(".story-title") as HTMLElement).textContent=l.title;(e.querySelector(".story-text") as HTMLElement).textContent=l.text;state.seen.add(String(i));navigator.vibrate?.(i>=3?[30,30,60]:15)}
