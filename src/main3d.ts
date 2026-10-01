@@ -16,6 +16,9 @@ let running=false, paused=false, time=0, score=0, combo=0, comboTimer=0, hp=SHIP
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x01030a);
 scene.fog = new THREE.FogExp2(0x01030a,.006);
+scene.add(new THREE.AmbientLight(0x9abfff,1.25));
+const keyLight = new THREE.DirectionalLight(0xffffff,2.1); keyLight.position.set(-6,12,15); scene.add(keyLight);
+const rimLight = new THREE.PointLight(0x00dfff,32,180); rimLight.position.set(8,5,4); scene.add(rimLight);
 const camera = new THREE.PerspectiveCamera(64,innerWidth/innerHeight,.1,1800);
 camera.position.set(0,5,20);
 camera.lookAt(0,0,-65);
